@@ -15,8 +15,8 @@ def sendText(request):
                 return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': True, 'enteredUrl': url, 'errorText': 'Ця url-адреса не може бути відкрита'})
             else:
                 print(processingResult['result'])
-                finalLabels = helper.getFinalLabels(processingResult['result'])
-                return render(request, 'resultPage.html', {'labels': finalLabels, 'text': processingResult['text']})
+                # finalLabels = helper.getFinalLabels(processingResult['result'])
+                return render(request, 'resultPage.html', {'result': processingResult['result'], 'text': processingResult['text']})
         else:
             return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': True, 'enteredUrl': url, 'errorText': 'Невірна url-адреса'})
     return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': False}) 

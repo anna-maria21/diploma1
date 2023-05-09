@@ -14,11 +14,11 @@ def processData(url):
         return { 'isURLOpenError': True }
 
 
-def getFinalLabels(result):
-    prevScore = result['scores'][0]
-    finalLabels = [result['labels'][0]]
-    for i in range(1, len(result['scores'])):
-        if prevScore - result['scores'][i] < 0.05:
-            prevScore = result['scores'][i]
-            finalLabels.append(result['labels'][i])
-    return finalLabels
+# def getFinalLabels(result):
+#     prevScore = result['scores'][0]
+#     finalLabels = [result['labels'][0]]
+#     for i in range(1, len(result['scores'])):
+#         if prevScore - result['scores'][i] < 0.05:
+#             prevScore = result['scores'][i]
+#             finalLabels.append(result['labels'][i])
+#     return finalLabels
