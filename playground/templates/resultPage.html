@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+    <div>
+        <ul class="labels"> 
+            {% for l in labels %}
+                <li>{{ l }}</li> 
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <div class="news_text">
+        <p class="text_p">{{ text }}</p>
+    </div>
+{% endblock %}

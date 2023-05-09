@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="form">
+    <form method="post">
+      {% csrf_token %}
+      <input type="text"  name="input" placeholder="URL" value="{{ enteredUrl }}"><br>
+      {% if isAnyError %}
+        <p class="error">{{ errorText }}</p>
+      {% endif %}
+      <input type="submit" class="bn3637 bn36 down_bn" value="Відправити">
+    </form>
+  </section>
+{% endblock %}
