@@ -262,3 +262,9 @@ form {
 .text_p {
   text-align: justify;
 }
+.url_text {
+  text-align: left;
+}
+.url:hover {
+  color: #3A3E60;
+}
