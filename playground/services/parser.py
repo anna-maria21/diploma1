@@ -1,5 +1,4 @@
 from html.parser import HTMLParser
-#from urllib.request import urlopen
 import re
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -33,7 +32,7 @@ class MyHTMLParser(HTMLParser):
 
     def handle_data(self, data):
         if self.in_body and not self.in_header and self.in_p:
-            if 'а' <= data <= 'я' or 'А' <= data <= 'Я' or re.search("[,.?!-;:\"' ]", data):
+            if 'а' <= data <= 'я' or 'А' <= data <= 'Я' or re.search("[,.?!-;:\"' ^[ +©]]", data):
                 self.text.append(data.strip())
 
     def get_text(self):
@@ -50,13 +49,4 @@ def prepare_data(url):
     parser = MyHTMLParser()
     parser.feed(html)
     return parser
-    """try:
-        response = urlopen(url)
-        html_bytes = response.read()
-        html = html_bytes.decode('windows-1251')
-        parser = MyHTMLParser()
-        parser.feed(html)
-        return parser.get_text()
-    except HTTPError as err:
-        parser.error = True"""
     

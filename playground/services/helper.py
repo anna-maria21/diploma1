@@ -1,24 +1,16 @@
 from playground.services import classificator
 from playground.services import translator
 from playground.services import parser
-
+from playground.services import working_with_db
 
 def processData(url):
     text = parser.prepare_data(url)
     if not text.get_error():
-        translatedText = translator.translate(text.get_text())
+        ukrainianText = text.get_text()
+        translatedText = translator.translate(ukrainianText)
         englishText = translatedText['translated_text']
         result = classificator.classify(englishText)
-        return { 'isURLOpenError': False, 'result': result, 'text': text.get_text() }
+        working_with_db.insertDocument(result, url, ukrainianText)
+        return { 'isURLOpenError': False, 'text': text.get_text() }
     else:
         return { 'isURLOpenError': True }
-
-
-# def getFinalLabels(result):
-#     prevScore = result['scores'][0]
-#     finalLabels = [result['labels'][0]]
-#     for i in range(1, len(result['scores'])):
-#         if prevScore - result['scores'][i] < 0.05:
-#             prevScore = result['scores'][i]
-#             finalLabels.append(result['labels'][i])
-#     return finalLabels
