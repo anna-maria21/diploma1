@@ -32,7 +32,8 @@ class MyHTMLParser(HTMLParser):
 
     def handle_data(self, data):
         if self.in_body and not self.in_header and self.in_p:
-            if 'а' <= data <= 'я' or 'А' <= data <= 'Я' or re.search("[,.?!-;:\"' ^[ +©]]", data):
+            isUkrainian = 'а' <= data <= 'я' or 'А' <= data <= 'Я'
+            if isUkrainian or re.search("[,.?!-;:\"ЄєЇїҐґ ^[ +©]]", data):
                 self.text.append(data.strip())
 
     def get_text(self):
@@ -43,10 +44,13 @@ class MyHTMLParser(HTMLParser):
 
 
 def prepare_data(url):
-    response = urlopen(url)
-    html_bytes = response.read()
-    html = html_bytes.decode('windows-1251')
     parser = MyHTMLParser()
-    parser.feed(html)
+    try:
+        response = urlopen(url)
+        html_bytes = response.read()
+        html = html_bytes.decode('windows-1251')
+        parser.feed(html)
+    except HTTPError:
+        parser.error = True
+
     return parser
-    

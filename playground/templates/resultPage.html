@@ -7,31 +7,60 @@
     </div>
 
     <div class="news_text">
+         <!--{% load static %}
+          <div class="make_mark">
+          <p class="input_label">Оцініть точність класифікації</p>
+          <input type="number" min="0" max="5" placeholder="5" name="mark" class="input_mark">
+          <img src="{% static '/images/star.png' %}" class="star">
+          <input type="submit" value="Оцінити" class="bn3637 bn36 down_bn mark_bn"></input>
+        </div> -->
         <p class="url_text">Посилання на новину: <a href="{{ url }}" class="url">{{ url }}</a></p>
-        <p class="text_p">{{ text }}</p>
+        <p class="text_p">{{ text }}</p> 
+        <a href="/playground/form" class="bn3637 bn36 down_bn">Повернутися</a>
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-<script>
+    <script>
+      // document.addEventListener("DOMContentLoaded", function(event) { 
+      //       var scrollpos = localStorage.getItem('scrollpos');
+      //       if (scrollpos) window.scrollTo(0, scrollpos);
+      //   });
 
-  new Chart(
-    document.getElementById('chart'),
-    {
-      type: 'bar',
-      options: {
-        indexAxis: 'y',
-      },
-      data: {
-        labels: [{% for label in labels %} '{{ label }}', {% endfor %}],
-        datasets: [
-          {
-            label: 'Результати',
-            data: [{% for score in scores %} '{{ score }}', {% endfor %}]
-          }
-        ]
+      //   window.onbeforeunload = function(e) {
+      //       localStorage.setItem('scrollpos', window.scrollY);
+      //   };
+
+      const translations = {
+        "Military": "Війна",
+        "Culture": "Культура",
+        "Sport": "Спорт",
+        "Tech": "Технології",
+        "Policy": "Політика",
+        "Health": "Здоров'я",
+        "Ecology": "Екологія",
+        "Science": "Наука",
+        "Nature": "Природа",
+        "Economics": "Економіка",
       }
-    }
-  );
-</script>
+      new Chart(
+        document.getElementById('chart'),
+        {
+          type: 'bar',
+          options: {
+            indexAxis: 'y',
+          },
+          data: {
+            labels: [{% for label in labels %} translations['{{label}}'], {% endfor %}],
+            datasets: [
+              {
+                label: 'Результати',
+                data: [{% for score in scores %} '{{ score }}', {% endfor %}]
+              }
+            ]
+          }
+        }
+      );
+    </script>
 
 {% endblock %}

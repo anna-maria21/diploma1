@@ -12,6 +12,7 @@ def sendText(request):
     if request.method == 'POST':
         url = request.POST['input']
         foundedDocument = working_with_db.findByUrl(url)
+        # print('****')
         context = {}
         if foundedDocument is None:
             if validator.validate(url):

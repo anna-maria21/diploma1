@@ -4,7 +4,16 @@
   <section class="form">
     <form method="post">
       {% csrf_token %}
-      <input type="text"  name="input" placeholder="URL" value="{{ enteredUrl }}"><br>
+      <div class="display_flex">
+        <input type="text"  name="input" placeholder="URL" value="{{ enteredUrl }}">
+        {% load static %}
+        <div class="info_img_div">
+          <img src="{% static '/images/info.svg' %}" class="info_img">
+          <div class="info_text">
+            Вставте у поле посилання на новину з українського сайту. Якщо отримуєте повідомлення, що адреса не може бути відкрита, це означає, що даний сайт захищений від парсингу або така сторінка відсутня, тому Ви не зможете скористатися цим додатком, щоб прокласифікувати новини з нього
+          </div>
+        </div>
+      </div>
       {% if isAnyError %}
         <p class="error">{{ errorText }}</p>
       {% endif %}
