@@ -2,9 +2,10 @@
     <div class="header">
         <!--Content before waves-->
         <div class="inner-header flex">
+            {% load static %}
             <!--Just the logo.. Don't mind this-->
-            <img class="logo" src="../static/images/artificial.png" />
-            <h1>News Classifier</h1>
+            <img class="logo" src="{% static '/images/artificial.png' %}" />
+            <h1><a href="/" class="tostart">News Classifier</a></h1>
         </div>
         {% if isStartPage %}
         <a href="/playground/form" class="bn3637 bn36">Почати</a>
