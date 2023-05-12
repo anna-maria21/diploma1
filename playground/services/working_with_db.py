@@ -22,6 +22,14 @@ def insertDocument(result, url, text):
     return
 
 
+def updateDocument(url, mark):
+    collection_name.update_one(
+        { "url": url },
+        { "$set": { "mark": mark } }
+    )
+    return
+
+
 def findByUrl(url):
     try:
         return collection_name.find_one({"url": url})
