@@ -4,5 +4,6 @@ from . import views
 # URLConf
 urlpatterns = [
     path('', views.start),
-    path("form/", views.sendText)
+    path("form/", views.sendText),
+    # path("result/", views.showResult)
 ]

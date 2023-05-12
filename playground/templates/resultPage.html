@@ -2,21 +2,28 @@
 
 {% block content %}
   
-    <div>
-        <div><canvas id="chart"></canvas></div>
-    </div>
-
-    <div class="news_text">
-         <!--{% load static %}
-          <div class="make_mark">
-          <p class="input_label">Оцініть точність класифікації</p>
+    <!-- {% load static %}
+    <div class="make_mark">
+      {% if mark %}
+        <div>Оцінка класифікації: {{ mark }}</div>
+      {% else %}
+        <p class="input_label">Оцініть точність класифікації</p>
+        <form action="post">
+          {% csrf_token %}
           <input type="number" min="0" max="5" placeholder="5" name="mark" class="input_mark">
           <img src="{% static '/images/star.png' %}" class="star">
           <input type="submit" value="Оцінити" class="bn3637 bn36 down_bn mark_bn"></input>
-        </div> -->
-        <p class="url_text">Посилання на новину: <a href="{{ url }}" class="url">{{ url }}</a></p>
-        <p class="text_p">{{ text }}</p> 
-        <a href="/playground/form" class="bn3637 bn36 down_bn">Повернутися</a>
+        </form>
+      {% endif %} 
+    </div>-->
+    <div>
+      <canvas id="chart"></canvas>
+    </div>
+
+    <div class="news_text">
+      <p class="url_text">Посилання на новину: <a href="{{ url }}" class="url">{{ url }}</a></p>
+      <p class="text_p">{{ text }}</p> 
+      <a href="/playground/form" class="bn3637 bn36 down_bn">Повернутися</a>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
