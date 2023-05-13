@@ -1,21 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  
-    <!-- {% load static %}
-    <div class="make_mark">
-      {% if mark %}
-        <div>Оцінка класифікації: {{ mark }}</div>
-      {% else %}
-        <p class="input_label">Оцініть точність класифікації</p>
-        <form action="post">
-          {% csrf_token %}
-          <input type="number" min="0" max="5" placeholder="5" name="mark" class="input_mark">
-          <img src="{% static '/images/star.png' %}" class="star">
-          <input type="submit" value="Оцінити" class="bn3637 bn36 down_bn mark_bn"></input>
-        </form>
-      {% endif %} 
-    </div>-->
+
     <div>
       <canvas id="chart"></canvas>
     </div>
@@ -29,18 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script>
-      // document.addEventListener("DOMContentLoaded", function(event) { 
-      //       var scrollpos = localStorage.getItem('scrollpos');
-      //       if (scrollpos) window.scrollTo(0, scrollpos);
-      //   });
-
-      //   window.onbeforeunload = function(e) {
-      //       localStorage.setItem('scrollpos', window.scrollY);
-      //   };
 
       const translations = {
         "Military": "Війна",
-        "Culture": "Культура",
+        "Entertainment": "Культура",
         "Sport": "Спорт",
         "Tech": "Технології",
         "Policy": "Політика",

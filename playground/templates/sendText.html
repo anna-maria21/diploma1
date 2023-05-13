@@ -5,7 +5,7 @@
     <form method="post">
       {% csrf_token %}
       <div class="display_flex">
-        <input type="text"  name="input" placeholder="URL" value="{{ enteredUrl }}">
+        <input type="text"  name="input" placeholder="URL" value="{{ enteredUrl }}"  onclick="removeErrorMessage()">
         {% load static %}
         <div class="info_img_div">
           <img src="{% static '/images/info.svg' %}" class="info_img">
@@ -20,4 +20,10 @@
       <input type="submit" class="bn3637 bn36 down_bn" value="Відправити"></input>
     </form>
   </section>
+  <script>
+    function removeErrorMessage() {
+      let message = document.getElementsByClassName("error")
+      message[0].parentNode.removeChild(message[0]);
+    }
+  </script>
 {% endblock %}

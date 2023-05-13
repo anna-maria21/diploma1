@@ -13,24 +13,22 @@ def sendText(request):
         url = request.POST['input']
         foundedDocument = working_with_db.findByUrl(url)
         context = {}
+        errorText = ''
         if foundedDocument is None:
             if validator.validate(url):
                 processingResult = helper.processData(url)
                 if processingResult['isURLOpenError']:
-                    return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': True, 'enteredUrl': url, 'errorText': 'Ця url-адреса не може бути відкрита'})
-                else:
-                    foundedDocument = working_with_db.findByUrl(url)
-                    # context = {
-                    #     'labels': foundedDocument['labelsOrder'],
-                    #     'scores': foundedDocument['scores'],
-                    #     'text': foundedDocument['text'],
-                    #     'url': foundedDocument['url']
-                    # }
-                    # return render(request, 'resultPage.html', context)
+                    errorText = 'Ця url-адреса не може бути відкрита'
             else:
-                return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': True, 'enteredUrl': url, 'errorText': 'Невірна url-адреса'})
-        # else: 
-            
+                errorText = 'Невірна url-адреса'
+            context = {
+                    'isStartPage': False,
+                    'isAnyError': True,
+                    'enteredUrl': url,
+                    'errorText': errorText
+                }
+            return render(request, 'sendText.html', context)
+        foundedDocument = working_with_db.findByUrl(url)
         context = {
                 'labels': foundedDocument['labelsOrder'],
                 'scores': foundedDocument['scores'],
@@ -38,7 +36,5 @@ def sendText(request):
                 'url': foundedDocument['url']
         }
         return render(request, 'resultPage.html', context)
-    return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': False}) 
-
-
+    return render(request, 'sendText.html', {'isStartPage': False, 'isAnyError': False})  
 
