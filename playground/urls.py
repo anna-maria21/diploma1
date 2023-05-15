@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path('', views.start),
     path("form/", views.sendText),
-    # path("result/", views.showResult)
+    path("mark/", views.makeMark)
 ]
