@@ -2,6 +2,7 @@
 
 {% block content %}
   <section class="form">
+    <p class="avg_mark">Середня оцінка цього класифікатора: {{ avgMark }} </p>
     <form method="post">
       {% csrf_token %}
       <div class="display_flex">

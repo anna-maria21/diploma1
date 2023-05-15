@@ -32,7 +32,7 @@ class MyHTMLParser(HTMLParser):
 
     def handle_data(self, data):
         if self.in_body and not self.in_header and self.in_p and not self.end:
-            if ('а' <= data <= 'я' or 'А' <= data <= 'Я' or re.search("[,.?!-;:\"'ЇїЄє ]*", data)):
+            if (re.search("[,.?!-;:\"'ЇїЄє ]*", data)):
                 if re.match("^©", data.strip()):
                     self.end = True
                 else:

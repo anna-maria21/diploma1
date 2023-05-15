@@ -16,7 +16,8 @@ def insertDocument(result, url, text):
         "url": url,
         "text": text,
         "labelsOrder": result['labels'],
-        "scores": result["scores"]
+        "scores": result["scores"],
+        "mark": 0
     }
     collection_name.insert_one(newsDocument)
     return
@@ -27,3 +28,17 @@ def findByUrl(url):
         return collection_name.find_one({"url": url})
     except:
         return None
+
+def makeMark(url, mark):
+    collection_name.update_one(
+        {'url': url },
+        { "$set": { "mark": mark } }
+    )
+    return
+
+def findAll():
+    marks = []
+    for mark in collection_name.find({}, {"_id": 0, "mark": 1}):
+        print(mark)
+        marks.append(mark['mark'])
+    return marks
