@@ -3,7 +3,8 @@
 {% block content %}
 
     <div>
-      <canvas id="chart"></canvas>
+      <canvas id="zeroShotChart"></canvas>
+      <canvas id="bartChart"></canvas>
     </div>
 
     <div class="news_text">
@@ -33,18 +34,37 @@
         "Culture": "Культура"
       }
       new Chart(
-        document.getElementById('chart'),
+        document.getElementById('bartChart'),
         {
           type: 'bar',
           options: {
             indexAxis: 'y',
           },
           data: {
-            labels: [{% for label in labels %} translations['{{label}}'], {% endfor %}],
+            labels: [{% for label in bartLabels %} translations['{{label}}'], {% endfor %}],
             datasets: [
               {
                 label: 'Результати',
-                data: [{% for score in scores %} '{{ score }}', {% endfor %}]
+                data: [{% for score in bartScores %} '{{ score }}', {% endfor %}]
+              }
+            ]
+          }
+        }
+      );
+
+      new Chart(
+        document.getElementById('zeroShotChart'),
+        {
+          type: 'bar',
+          options: {
+            indexAxis: 'y',
+          },
+          data: {
+            labels: [{% for label in zeroShotLabels %} translations['{{label}}'], {% endfor %}],
+            datasets: [
+              {
+                label: 'Результати',
+                data: [{% for score in zeroShotScores %} '{{ score }}', {% endfor %}]
               }
             ]
           }

@@ -34,8 +34,10 @@ def sendText(request):
                 return render(request, 'sendText.html', context)
         foundedDocument = working_with_db.findByUrl(url)
         context = {
-                'labels': foundedDocument['labelsOrder'],
-                'scores': foundedDocument['scores'],
+                'bartLabels': foundedDocument['bartLabelsOrder'],
+                'bartScores': foundedDocument['bartScores'],
+                'zeroShotLabels': foundedDocument['zeroShotLabelsOrder'],
+                'zeroShotScores': foundedDocument['zeroShotScores'],
                 'text': foundedDocument['text'],
                 'url': foundedDocument['url']
         }
