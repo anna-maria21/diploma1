@@ -11,12 +11,14 @@ dbname = my_client['diploma']
 # Now get/create collection name (remember that you will see the database in your mongodb cluster only after you create a collection
 collection_name = dbname["news"]
 
-def insertDocument(result, url, text):
+def insertDocument(resultBart, resultZeroShot, url, text):
     newsDocument = {
         "url": url,
         "text": text,
-        "labelsOrder": result['labels'],
-        "scores": result["scores"],
+        "bartLabelsOrder": resultBart['labels'],
+        "bartScores": resultBart["scores"],
+        "zeroShotLabelsOrder": resultZeroShot['labels'],
+        "zeroShotScores": resultZeroShot["scores"],
         "mark": 0
     }
     collection_name.insert_one(newsDocument)
@@ -39,6 +41,5 @@ def makeMark(url, mark):
 def findAll():
     marks = []
     for mark in collection_name.find({}, {"_id": 0, "mark": 1}):
-        print(mark)
         marks.append(mark['mark'])
     return marks

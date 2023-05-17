@@ -12,8 +12,9 @@ def processData(url):
         ukrainianText = text.get_text()
         translatedText = translator.translate(ukrainianText)
         englishText = translatedText['translated_text']
-        result = classificator.classify(englishText)
-        working_with_db.insertDocument(result, url, ukrainianText)
+        resultBart = classificator.classifyBart(englishText)
+        resultZeroShot = classificator.classifyZeroShot(englishText)
+        working_with_db.insertDocument(resultBart, resultZeroShot, url, ukrainianText)
         return { 'isURLOpenError': False, 'text': text.get_text() }
     else:
         return { 'isURLOpenError': True }
