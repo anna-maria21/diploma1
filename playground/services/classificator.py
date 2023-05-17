@@ -16,7 +16,7 @@ data = [
     "A military, also known collectively as armed forces, is a heavily armed, highly organized force primarily intended for warfare. It is typically authorized and maintained by a sovereign state, with its members identifiable by their distinct military uniform. It may consist of one or more military branches such as an army, navy, air force, space force, marines, or coast guard. The main task of the military is usually defined as defence of the state and its interests against external armed threats.",
     "Ecology is the study of the relationships between living organisms, including humans, and their physical environment; it seeks to understand the vital connections between plants and animals and the world around them. Ecology also provides information about the benefits of ecosystems and how we can use Earth’s resources in ways that leave the environment healthy for future generations. Efforts are being made to protect the environment.",
     "Science is a systematic endeavor that builds and organizes knowledge in the form of testable explanations and predictions about the universe. Scientific breakthrough in cancer research.",
-    "Nature, in the broadest sense, is the physical world or universe. Nature can refer to the phenomena of the physical world, and also to life in general. Exploring the beauty of nature through photography. It is oceans, seas, lakes, rivers, mountains, trees, bushes, forests, meadows.",
+    "Nature, in the broadest sense, is the physical world or universe. Nature can refer to the phenomena of the physical world, and also to life in general. Exploring the beauty of nature through photography. It is oceans, seas, lakes, rivers, mountains, islands, trees, bushes, forests, meadows, animals, birds, fish and any living organisms. Also it is a seasons - summer, autumn, winter and spring, climat.",
     "Economic indicators show signs of growth. Macroeconomics studies how the economy behaves as a whole, including inflation, price levels, rate of growth, national income, gross domestic product and changes in employment rates. Microeconomics studies the implications of individual human action, and is key to a person's financial health."
 ]
 
@@ -45,9 +45,10 @@ def classifyZeroShot(text):
     scores = cosine_similarities[0]
 
     sorted_indices = np.argsort(scores)[::-1]
-    sorted_labels = np.array(candidate_labels)[sorted_indices]
-    sorted_scores = scores[sorted_indices]
+    sorted_labels = np.array(candidate_labels)[sorted_indices].tolist()
+    sorted_scores = scores[sorted_indices].tolist()
 
+    print('qqqqqqqqq')
     min_score = min(sorted_scores) * 2
     right_sorted_scores = []
     print(min_score)

@@ -12,6 +12,7 @@ dbname = my_client['diploma']
 collection_name = dbname["news"]
 
 def insertDocument(resultBart, resultZeroShot, url, text):
+    print("************")
     newsDocument = {
         "url": url,
         "text": text,
@@ -21,6 +22,7 @@ def insertDocument(resultBart, resultZeroShot, url, text):
         "zeroShotScores": resultZeroShot["scores"],
         "mark": 0
     }
+    print('///////////')
     collection_name.insert_one(newsDocument)
     return
 
