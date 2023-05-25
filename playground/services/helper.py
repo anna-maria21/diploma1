@@ -11,10 +11,12 @@ def processData(url):
     if not text.get_error():
         ukrainianText = text.get_text()
         translatedText = translator.translate(ukrainianText)
-        englishText = translatedText['translated_text']
+        englishText = translatedText['result']
         resultBart = classificator.classifyBart(englishText)
         resultZeroShot = classificator.classifyZeroShot(englishText)
-        working_with_db.insertDocument(resultBart, resultZeroShot, url, ukrainianText)
+        resultRandomForest = classificator.classifyRandomForest(englishText)
+        # resultRandomForest = ''
+        working_with_db.insertDocument(resultBart, resultZeroShot, resultRandomForest, url, ukrainianText)
         return { 'isURLOpenError': False, 'text': text.get_text() }
     else:
         return { 'isURLOpenError': True }

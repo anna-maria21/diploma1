@@ -1,20 +1,21 @@
 import requests
 
 def translate(text):
-
-    url = "https://translo.p.rapidapi.com/api/v3/translate"
+    url = "https://lingvanex-translate.p.rapidapi.com/translate"
 
     payload = {
-        "from": "uk",
-        "to": "en",
-        "text": text
+        "from": "uk_UK",
+        "to": "en_GB",
+        "data": text,
+        "platform": "api"
     }
     headers = {
-        "content-type": "application/x-www-form-urlencoded",
+        "content-type": "application/json",
         "X-RapidAPI-Key": "d50a0ee0c9msh3e18b6831a149f5p14b75ajsn2dadf1d63a74",
-        "X-RapidAPI-Host": "translo.p.rapidapi.com"
+        "X-RapidAPI-Host": "lingvanex-translate.p.rapidapi.com"
     }
 
-    response = requests.post(url, data=payload, headers=headers)
+    response = requests.post(url, json=payload, headers=headers)
 
+    # print(response.json())
     return response.json()

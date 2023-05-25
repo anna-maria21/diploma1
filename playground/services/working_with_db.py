@@ -11,8 +11,7 @@ dbname = my_client['diploma']
 # Now get/create collection name (remember that you will see the database in your mongodb cluster only after you create a collection
 collection_name = dbname["news"]
 
-def insertDocument(resultBart, resultZeroShot, url, text):
-    print("************")
+def insertDocument(resultBart, resultZeroShot, resultRandomForest, url, text):
     newsDocument = {
         "url": url,
         "text": text,
@@ -20,9 +19,9 @@ def insertDocument(resultBart, resultZeroShot, url, text):
         "bartScores": resultBart["scores"],
         "zeroShotLabelsOrder": resultZeroShot['labels'],
         "zeroShotScores": resultZeroShot["scores"],
+        "randomForestLabel": resultRandomForest,
         "mark": 0
     }
-    print('///////////')
     collection_name.insert_one(newsDocument)
     return
 

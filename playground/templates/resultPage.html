@@ -3,8 +3,9 @@
 {% block content %}
 
     <div>
-      <canvas id="zeroShotChart"></canvas>
       <canvas id="bartChart"></canvas>
+      <canvas id="zeroShotChart"></canvas>
+      <p class="random_forest_result" id="random_forest_result"></p>
     </div>
 
     <div class="news_text">
@@ -32,7 +33,11 @@
         "Nature": "Природа",
         "Economics": "Економіка",
         "Culture": "Культура"
-      }
+      };
+      
+      document.getElementById('random_forest_result').innerHTML = 
+        "Результати Random Forest Classification: " + translations['{{ randomForestLabel }}'];
+
       new Chart(
         document.getElementById('bartChart'),
         {
@@ -44,7 +49,7 @@
             labels: [{% for label in bartLabels %} translations['{{label}}'], {% endfor %}],
             datasets: [
               {
-                label: 'Результати',
+                label: 'Результати facebook/BART-large-mnli',
                 data: [{% for score in bartScores %} '{{ score }}', {% endfor %}]
               }
             ]
@@ -63,7 +68,7 @@
             labels: [{% for label in zeroShotLabels %} translations['{{label}}'], {% endfor %}],
             datasets: [
               {
-                label: 'Результати',
+                label: 'Результати zero-shot-classification',
                 data: [{% for score in zeroShotScores %} '{{ score }}', {% endfor %}]
               }
             ]

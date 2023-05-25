@@ -4,6 +4,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 import numpy as np
+import joblib
+from pathlib import Path
 
 candidate_labels = ['Policy', 'Entertainment', 'Sport', 'Tech', 'Health', 'Military', 'Ecology', 'Science', 'Nature', 'Economics']
 
@@ -48,10 +50,17 @@ def classifyZeroShot(text):
     sorted_labels = np.array(candidate_labels)[sorted_indices].tolist()
     sorted_scores = scores[sorted_indices].tolist()
 
-    print('qqqqqqqqq')
     min_score = min(sorted_scores) * 2
     right_sorted_scores = []
-    print(min_score)
     for i in range(len(sorted_scores)):
         right_sorted_scores.append(sorted_scores[i] - min_score)
     return { 'labels': sorted_labels, 'scores': right_sorted_scores }
+
+
+def classifyRandomForest(text):
+    HERE = Path(__file__).parent
+    vectorizer = joblib.load(HERE / 'vectorizer.pkl')
+    clf = joblib.load(HERE / 'model.pkl')
+    vectorizedText = vectorizer.transform([text])
+    predictedClass = clf.predict(vectorizedText)
+    return predictedClass[0]

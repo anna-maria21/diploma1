@@ -309,8 +309,9 @@ form {
   opacity: 1;
 }
 
-#chart {
-  margin-top: 50px;
+#bartChart, #zeroShotChart {
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 .make_mark {
   display: flex;
@@ -354,4 +355,8 @@ form {
 
 .avg_mark {
   margin-bottom: 50px;
+}
+
+.random_forest_result {
+  font-size: 18px;
 }
