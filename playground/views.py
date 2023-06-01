@@ -38,6 +38,7 @@ def sendText(request):
                 'bartScores': foundedDocument['bartScores'],
                 'zeroShotLabels': foundedDocument['zeroShotLabelsOrder'],
                 'zeroShotScores': foundedDocument['zeroShotScores'],
+                'randomForestLabel': foundedDocument['randomForestLabel'],
                 'text': foundedDocument['text'],
                 'url': foundedDocument['url']
         }
